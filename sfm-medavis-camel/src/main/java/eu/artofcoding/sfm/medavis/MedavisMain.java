@@ -12,9 +12,9 @@
 package eu.artofcoding.sfm.medavis;
 
 import org.apache.camel.spring.SpringCamelContext;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+import javax.swing.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -24,24 +24,34 @@ public class MedavisMain {
 
     private static final CountDownLatch latch = new CountDownLatch(1);
 
-    private static ApplicationContext applicationContext0;
-    
-    /**
-     * Stop Camel when JVM shuts down.
-     */
+    private static FileSystemXmlApplicationContext applicationContext0;
+
+    private static JFrame medavisMainFrame;
+
     private static void addShutdownHook() {
-        // Get Camel context
-        final SpringCamelContext camel = (SpringCamelContext) applicationContext0.getBean("medavisCamelContext");
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    camel.stop();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                shutdown();
             }
         }));
+    }
+
+    public static void shutdown() {
+        latch.countDown();
+        completed.getAndSet(true);
+        try {
+            applicationContext0.refresh();
+            // Get Camel context
+            final SpringCamelContext camel = (SpringCamelContext) applicationContext0.getBean("medavisCamelContext");
+            camel.stop();
+            // Stop Spring
+            applicationContext0.close();
+            // Dispose main frame
+            medavisMainFrame.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -55,6 +65,8 @@ public class MedavisMain {
         applicationContext0 = new FileSystemXmlApplicationContext(filesystemConfigLocation);
         // Add shutdown hook
         addShutdownHook();
+        // Show main form
+        medavisMainFrame = new MedavisMainForm().show();
         // Await countdown latch... it's intended to wait forever
         while (!completed.get()) {
             try {
