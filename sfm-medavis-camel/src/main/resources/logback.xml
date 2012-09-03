@@ -7,7 +7,7 @@
         </encoder>
     </appender>
     <appender name="ROLLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>sfm-medavis-camel.log</file>
+        <file>log/sfm-medavis-camel.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
             <fileNamePattern>sfm-medavis-%d{yyyy-MM-dd}_%i.log</fileNamePattern>
@@ -25,19 +25,19 @@
     <!-- -->
     <root level="INFO">
         <appender-ref ref="ROLLINGFILE"/>
-        <appender-ref ref="STDOUT"/>
+        <!-- <appender-ref ref="STDOUT"/> -->
     </root>
     <!-- -->
     <logger name="eu.artofcoding.sfm.medavis" level="DEBUG" additivity="false">
         <appender-ref ref="ROLLINGFILE"/>
-        <appender-ref ref="STDOUT"/>
+        <!-- <appender-ref ref="STDOUT"/> -->
     </logger>
     <logger name="eu.artofcoding.sfm.medavis.route" level="DEBUG" additivity="false">
         <appender-ref ref="ROLLINGFILE"/>
-        <appender-ref ref="STDOUT"/>
+        <!-- <appender-ref ref="STDOUT"/> -->
     </logger>
     <logger name="eu.artofcoding.sfm.medavis.admin" level="DEBUG" additivity="false">
         <appender-ref ref="ROLLINGFILE"/>
-        <appender-ref ref="STDOUT"/>
+        <!-- <appender-ref ref="STDOUT"/> -->
     </logger>
 </configuration>

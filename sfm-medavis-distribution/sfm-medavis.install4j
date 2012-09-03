@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.2" transformSequenceNumber="4">
-  <directoryPresets config="/Users/rbe/project/factit/sfm-medavis/sfm-medavis-distribution/target/sfm-medavis-1.0.0-dist.zip" />
-  <application name="SFM Medavis" distributionSourceDir="" applicationId="1344-7823-8124-1840" mediaDir="" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="sfm-medavis" publisher="art of coding UG" publisherWeb="http://www.art-of-coding.eu" version="1.0.0" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="" javaMaxVersion="" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
+  <directoryPresets config="/Users/rbe/project/factit/sfm-medavis/sfm-medavis-distribution/target" />
+  <application name="SFM Medavis" distributionSourceDir="" applicationId="1344-7823-8124-1840" mediaDir="/Users/rbe/project/factit/sfm-medavis/sfm-medavis-distribution/target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="sfm-medavis" publisher="art of coding UG" publisherWeb="http://www.art-of-coding.eu" version="1.0.0" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.6" javaMaxVersion="1.6" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -19,16 +19,19 @@
     <filesets />
     <roots />
     <mountPoints>
+      <mountPoint id="29" root="" location="log" mode="755" />
       <mountPoint id="22" root="" location="" mode="755" />
     </mountPoints>
     <entries>
-      <fileEntry mountPoint="22" file="/Users/rbe/project/factit/sfm-medavis/sfm-medavis-distribution/target/sfm-medavis-1.0.0-dist.zip" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <dirEntry mountPoint="22" file="/Users/rbe/project/factit/sfm-medavis/sfm-medavis-distribution/target/sfm-medavis" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="sfm-medavis" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+        <exclude />
+      </dirEntry>
     </entries>
     <components />
   </files>
   <launchers>
     <launcher name="sfm-medavis" id="27" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="">
-      <executable name="sfm-medavis" type="1" iconSet="false" iconFile="" executableDir="" redirectStderr="true" stderrFile="support.log" stderrMode="overwrite" redirectStdout="true" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="3" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="requireAdministrator" checkConsoleParameter="false" globalSingleInstance="false">
+      <executable name="sfm-medavis" type="1" iconSet="false" iconFile="" executableDir="." redirectStderr="true" stderrFile="log/support.log" stderrMode="overwrite" redirectStdout="true" stdoutFile="log/output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="requireAdministrator" checkConsoleParameter="false" globalSingleInstance="false">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
       </executable>
       <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="" java6SplashScreen="false">
@@ -37,8 +40,10 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
         </text>
       </splashScreen>
-      <java mainClass="eu.artofcoding.sfm.medavis.MedavisMain" vmParameters="-Xms128m -Xmx1024m" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
-        <classPath />
+      <java mainClass="eu.artofcoding.sfm.medavis.MedavisMain" vmParameters="-Xms128m -Xmx512m" arguments="" allowVMPassthroughParameters="true" preferredVM="server" bundleRuntime="true">
+        <classPath>
+          <archive location="sfm-medavis-camel-1.0.0.jar" failOnError="false" />
+        </classPath>
         <nativeLibraryDirectories />
       </java>
       <includedFiles />
@@ -239,8 +244,26 @@
                       </void>
                       <void property="zipFile">
                         <object class="java.io.File">
-                          <string>sfm-medavis-1.0.0-dist.zip</string>
+                          <string>dist/sfm-medavis-1.0.0-dist.zip</string>
                         </object>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition />
+              </action>
+              <action name="" id="32" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
+                      <void property="files">
+                        <array class="java.io.File" length="1">
+                          <void index="0">
+                            <object class="java.io.File">
+                              <string>dist</string>
+                            </object>
+                          </void>
+                        </array>
                       </void>
                     </object>
                   </java>
