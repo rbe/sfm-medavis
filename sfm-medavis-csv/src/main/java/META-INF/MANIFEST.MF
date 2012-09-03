@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Class-Path: aopalliance-1.0.jar logback-classic-1.0.6.jar camel-csv-2.
+ 10.0.jar spring-context-3.0.7.RELEASE.jar logback-access-1.0.6.jar co
+ mmons-logging-1.1.1.jar spring-aop-3.0.7.RELEASE.jar camel-core-2.10.
+ 0.jar logback-core-1.0.6.jar spring-jdbc-3.1.2.RELEASE.jar spring-exp
+ ression-3.0.7.RELEASE.jar log4j-1.2.17.jar spring-core-3.1.2.RELEASE.
+ jar org.apache.servicemix.bundles.commons-csv-1.0-r706899_3.jar sprin
+ g-beans-3.1.2.RELEASE.jar juniversalchardet-1.0.3.jar mysql-connector
+ -java-5.1.21.jar spring-asm-3.0.7.RELEASE.jar spring-tx-3.0.7.RELEASE
+ .jar jcl-over-slf4j-1.6.6.jar camel-jdbc-2.10.0.jar camel-spring-2.10
+ .0.jar slf4j-api-1.6.6.jar
+Main-Class: 
+

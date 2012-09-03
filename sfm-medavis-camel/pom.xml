@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- -->
+    <groupId>eu.artofcoding.sfm.medavis</groupId>
+    <artifactId>sfm-medavis-camel</artifactId>
+    <version>1.0.0</version>
+    <!--
+        Parent project
+    -->
+    <parent>
+        <groupId>eu.artofcoding.sfm.medavis</groupId>
+        <artifactId>sfm-medavis</artifactId>
+        <version>1.0.0</version>
+        <relativePath>..</relativePath>
+    </parent>
+    <!--
+        Properties
+    -->
+    <properties>
+        <bundle.symbolicName>sfm-medavis-camel</bundle.symbolicName>
+        <bundle.namespace>eu.artofcoding.sfm.medavis.route</bundle.namespace>
+    </properties>
+    <!-- Package as Java Archive -->
+    <packaging>jar</packaging>
+    <!--
+        Dependencies.
+    -->
+    <dependencies>
+        <!-- Apache Commons -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${version.org.apache.commons.io}</version>
+        </dependency>
+        <!-- Apache CXF -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>${version.org.apache.cxf}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${version.org.apache.cxf}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <version>${version.org.apache.cxf}</version>
+        </dependency>
+        <!-- Apache Camel -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring</artifactId>
+            <version>${version.org.apache.camel}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-csv</artifactId>
+            <version>${version.org.apache.camel}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jetty</artifactId>
+            <version>${version.org.apache.camel}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-cxf</artifactId>
+            <version>${version.org.apache.camel}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-cxf-transport</artifactId>
+            <version>${version.org.apache.camel}</version>
+        </dependency>
+        <!-- SFM Medavis -->
+        <dependency>
+            <groupId>eu.artofcoding.sfm.medavis</groupId>
+            <artifactId>sfm-medavis-csv</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    <!--
+        Build
+    -->
+    <build>
+        <!-- Resources -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <!-- Plugins -->
+        <plugins>
+            <!-- maven-compiler-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.org.apache.maven.plugins.maven-compiler-plugin}</version>
+                <configuration>
+                    <source>${version.java.vm}</source>
+                    <target>${version.java.vm}</target>
+                    <showDeprecation>true</showDeprecation>
+                    <verbose/>
+                </configuration>
+            </plugin>
+            <!-- maven-resources-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${version.org.apache.maven.plugins.maven-resources-plugin}</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- maven-archiver-plugin -->
+            <plugin>
+                <!-- http://maven.apache.org/shared/maven-archiver/index.html -->
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <!-- <classpathMavenRepositoryLayout>true</classpathMavenRepositoryLayout> -->
+                            <mainClass>eu.artofcoding.sfm.medavis.MedavisMain</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

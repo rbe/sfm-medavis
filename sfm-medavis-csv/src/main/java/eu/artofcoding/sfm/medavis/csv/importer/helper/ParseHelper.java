@@ -1,0 +1,105 @@
+/*
+ * SFM Medavis Tool
+ * Copyright (C) 2011-2012 art of coding UG (haftungsbeschränkt).
+ *
+ * Alle Rechte vorbehalten. Nutzung unterliegt Lizenzbedingungen.
+ * All rights reserved. Use is subject to license terms.
+ *
+ */
+package eu.artofcoding.sfm.medavis.csv.importer.helper;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+/**
+ * @author rbe
+ */
+public class ParseHelper {
+
+    /**
+     * Logger.
+     */
+    private static final Logger logger = LoggerFactory.getLogger(ParseHelper.class);
+
+    /**
+     * Do not create an instance of this class.
+     */
+    private ParseHelper() {
+    }
+
+    /**
+     * @param input String containing a parseable number.
+     * @return Integer
+     */
+    public static Integer parseInteger(String input) {
+        Integer i = null;
+        try {
+            i = Integer.valueOf(input);
+        } catch (NumberFormatException e) {
+            logger.debug("parseInteger: Could not parse integer '" + input + "': " + e.getMessage());
+            i = 0;
+        }
+        return i;
+    }
+
+    /**
+     * @param input String containing a parseable number.
+     * @return Double
+     */
+    public static Double parseDouble(String input) {
+        Double d = null;
+        try {
+            // Replace comma with dot
+            input = input.replaceAll(",", ".");
+            d = Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            logger.debug("Cannot parse double '" + input + "': " + e.getMessage());
+            d = 0.0d;
+        }
+        return d;
+    }
+
+    /**
+     * @param input String containing a parseable date.
+     * @return java.util.Date
+     */
+    public static java.util.Date parseDate(String input) {
+        // Date formatter for german date.
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        java.util.Date date = null;
+        try {
+            date = sdf.parse(input);
+        } catch (ParseException e) {
+            logger.debug("Could not parse date '" + input + "': " + e.getMessage());
+            date = null;
+        } catch (NumberFormatException e) {
+            logger.debug("Could not parse date '" + input + "': " + e.getMessage());
+            date = null;
+        }
+        return date;
+    }
+
+    /**
+     * @param input String containing a parseable date/time.
+     * @return java.util.Date
+     */
+    public static java.util.Date parseDateTimeHHmm(String input) {
+        // Date formatter for german date.
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        java.util.Date date = null;
+        try {
+            date = sdf.parse(input);
+        } catch (ParseException e) {
+            logger.debug("Could not parse date '" + input + "': " + e.getMessage());
+            date = null;
+        } catch (NumberFormatException e) {
+            logger.debug("Could not parse date '" + input + "': " + e.getMessage());
+            date = null;
+        }
+        return date;
+    }
+
+}

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <!--
+        Camel.
+    -->
+    <camelContext xmlns="http://camel.apache.org/schema/spring"
+                  id="medavisCamelContext"
+                  trace="false">
+        <!--
+            Camel uses Spring's @Component annotated class to find route builders,
+            they must implement org.apache.camel.builder.RouteBuilder
+        -->
+        <!-- <contextScan /> -->
+        <!-- Disable JMX agent -->
+        <jmxAgent id="agent" disabled="true"/>
+        <!--
+        
+            Error handler.
+        
+        -->
+        <errorHandler id="deadLetterChannel" type="DeadLetterChannel" deadLetterUri="log:error">
+            <redeliveryPolicy maximumRedeliveries="0" maximumRedeliveryDelay="0" logStackTrace="false"/>
+        </errorHandler>
+        <!--
+        
+            Routes.
+        
+        -->
+        <!-- File upload route -->
+        <route id="fileUpload">
+            <from uri="jetty:http://0.0.0.0:80/sfm-medavis-admin/upload?chunked=true"/>
+            <to uri="log:admin-fileupload"/>
+            <process ref="fileUploadBean"/>
+        </route>
+        <!-- CSV export route -->
+        <route id="csvExport">
+            <from uri="jetty:http://0.0.0.0:80/sfm-medavis-admin/export?chunked=true"/>
+            <to uri="log:admin-csvexport"/>
+            <process ref="csvExporterService"/>
+        </route>
+        <!-- Detect charset -->
+        <route id="detectCharset">
+            <!-- Remember to change working directory in other routes and FileUploadBean too -->
+            <from uri="file:sfm-medavis-work/charset?readLockCheckInterval=2000"/>
+            <bean ref="charsetDetectorService" method="guessCharset"/>
+            <to uri="log:charsetDetector"/>
+        </route>
+        <!-- Split Medavis 145 CSV files -->
+        <route id="medavis145SplitCsv">
+            <!-- Remember to change working directory in other routes and FileUploadBean too -->
+            <from uri="file:sfm-medavis-work/medavis/145?readLockCheckInterval=2000"/>
+            <!-- Convert to UTF-8 -->
+            <convertBodyTo type="String" charset="UTF-8"/>
+            <unmarshal>
+                <csv/>
+            </unmarshal>
+            <!--
+            split stopOnException="true">
+                <simple>${body}</simple>
+                <to uri="direct:line"/>
+            </split
+            -->
+            <process ref="medavis145CSVReaderService"/>
+            <process ref="medavis145SQLImportService"/>
+        </route>
+        <!-- Split Medavis 307 CSV files -->
+        <route id="medavis307SplitCsv">
+            <!-- Remember to change working directory in other routes and FileUploadBean too -->
+            <from uri="file:sfm-medavis-work/medavis/307?readLockCheckInterval=2000"/>
+            <!-- Convert to UTF-8 -->
+            <convertBodyTo type="String" charset="UTF-8"/>
+            <unmarshal>
+                <csv/>
+            </unmarshal>
+            <process ref="medavis307CSVReaderService"/>
+            <process ref="medavis307SQLImportService"/>
+        </route>
+        <!-- Split Medavis 10025 CSV files -->
+        <route id="medavis10025SplitCsv">
+            <!-- Remember to change working directory in other routes and FileUploadBean too -->
+            <from uri="file:sfm-medavis-work/medavis/10025?readLockCheckInterval=2000"/>
+            <!-- Convert to UTF-8 -->
+            <convertBodyTo type="String" charset="UTF-8"/>
+            <unmarshal>
+                <csv/>
+            </unmarshal>
+            <process ref="medavis10025CSVReaderService"/>
+            <process ref="medavis10025SQLImportService"/>
+        </route>
+        <!-- Split Medavis 10039 CSV files -->
+        <route id="medavis10039SplitCsv">
+            <!-- Remember to change working directory in other routes and FileUploadBean too -->
+            <from uri="file:sfm-medavis-work/medavis/10039?readLockCheckInterval=2000"/>
+            <!-- Convert to UTF-8 -->
+            <convertBodyTo type="String" charset="UTF-8"/>
+            <unmarshal>
+                <csv/>
+            </unmarshal>
+            <process ref="medavis10039CSVReaderService"/>
+            <process ref="medavis10039SQLImportService"/>
+        </route>
+        <!-- Split Medavis 10040 CSV files -->
+        <route id="medavis10040SplitCsv">
+            <!-- Remember to change working directory in other routes and FileUploadBean too -->
+            <from uri="file:sfm-medavis-work/medavis/10040?readLockCheckInterval=2000"/>
+            <!-- Convert to UTF-8 -->
+            <convertBodyTo type="String" charset="UTF-8"/>
+            <unmarshal>
+                <csv/>
+            </unmarshal>
+            <process ref="medavis10040CSVReaderService"/>
+            <process ref="medavis10040SQLImportService"/>
+        </route>
+        <!-- Split Orbis Leistungen CSV files -->
+        <route id="orbisLstgSplitCsv">
+            <!-- Remember to change working directory in other routes and FileUploadBean too -->
+            <from uri="file:sfm-medavis-work/orbis/lstg?readLockCheckInterval=2000"/>
+            <!-- Convert to UTF-8 -->
+            <convertBodyTo type="String" charset="UTF-8"/>
+            <unmarshal>
+                <csv delimiter=";"/>
+            </unmarshal>
+            <process ref="orbisLstgCSVReaderService"/>
+            <process ref="orbisLstgSQLImportService"/>
+        </route>
+        <!-- Split Orbis ICPM CSV files -->
+        <route id="orbisIcpmSplitCsv">
+            <!-- Remember to change working directory in other routes and FileUploadBean too -->
+            <from uri="file:sfm-medavis-work/orbis/icpm?readLockCheckInterval=2000"/>
+            <!-- Convert to UTF-8 -->
+            <convertBodyTo type="String" charset="UTF-8"/>
+            <unmarshal>
+                <csv delimiter=";"/>
+            </unmarshal>
+            <process ref="orbisIcpmCSVReaderService"/>
+            <process ref="orbisIcpmSQLImportService"/>
+        </route>
+    </camelContext>
+</beans>

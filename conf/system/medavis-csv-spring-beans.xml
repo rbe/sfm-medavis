@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+    
+        Spring beans.
+    
+    -->
+    <!-- CharsetDetector-->
+    <bean id="charsetDetectorService" class="eu.artofcoding.sfm.medavis.charset.impl.CharsetDetectorImpl">
+    </bean>
+    <!-- CSVExporter -->
+    <bean id="csvExporterService" class="eu.artofcoding.sfm.medavis.csv.exporter.impl.CSVExporterImpl">
+    </bean>
+    <!-- Medavis145 -->
+    <bean id="medavis145CSVReaderService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis145CSVReaderImpl">
+    </bean>
+    <bean id="medavis145SQLImportService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis145SQLImportImpl">
+        <property name="dataSource" ref="mysqlProdDbDatasource"/>
+    </bean>
+    <!-- Medavis307 -->
+    <bean id="medavis307CSVReaderService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis307CSVReaderImpl">
+    </bean>
+    <bean id="medavis307SQLImportService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis307SQLImportImpl">
+        <property name="dataSource" ref="mysqlProdDbDatasource"/>
+    </bean>
+    <!-- Medavis10025 -->
+    <bean id="medavis10025CSVReaderService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis10025CSVReaderImpl">
+    </bean>
+    <bean id="medavis10025SQLImportService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis10025SQLImportImpl">
+        <property name="dataSource" ref="mysqlProdDbDatasource"/>
+    </bean>
+    <!-- Medavis10039 -->
+    <bean id="medavis10039CSVReaderService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis10039CSVReaderImpl">
+    </bean>
+    <bean id="medavis10039SQLImportService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis10039SQLImportImpl">
+        <property name="dataSource" ref="mysqlProdDbDatasource"/>
+    </bean>
+    <!-- Medavis10040 -->
+    <bean id="medavis10040CSVReaderService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis10040CSVReaderImpl">
+    </bean>
+    <bean id="medavis10040SQLImportService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis10040SQLImportImpl">
+        <property name="dataSource" ref="mysqlProdDbDatasource"/>
+    </bean>
+    <!-- OrbisLstg -->
+    <bean id="orbisLstgCSVReaderService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.OrbisLstgCSVReaderImpl">
+    </bean>
+    <bean id="orbisLstgSQLImportService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.OrbisLstgSQLImportImpl">
+        <property name="dataSource" ref="mysqlProdDbDatasource"/>
+    </bean>
+    <!-- OrbisIcpm -->
+    <bean id="orbisIcpmCSVReaderService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.OrbisIcpmCSVReaderImpl">
+    </bean>
+    <bean id="orbisIcpmSQLImportService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.OrbisIcpmSQLImportImpl">
+        <property name="dataSource" ref="mysqlProdDbDatasource"/>
+    </bean>
+</beans>

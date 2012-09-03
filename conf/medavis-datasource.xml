@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+    <!--
+    
+       Datasource.
+    
+    -->
+    <bean id="mysqlTestDbDatasource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+       <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+       <property name="url" value="jdbc:mysql://localhost/medavis"/>
+       <property name="username" value="root"/>
+       <property name="password" value="" />
+    </bean>
+    <bean id="mysqlProdDbDatasource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+       <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+       <property name="url" value="jdbc:mysql://localhost/medavis"/>
+       <property name="username" value="medavis"/>
+       <property name="password" value="medinterface" />
+       <!--
+       <property name="autoCommitOnClose" value="true"/>
+       <property name="checkoutTimeout" value="${c3p0pool.checkoutTimeout}"/>
+       <property name="initialPoolSize" value="${c3p0pool.minPoolSize}"/>
+       <property name="minPoolSize" value="${c3p0pool.minPoolSize}"/>
+       <property name="maxPoolSize" value="${c3p0pool.maxPoolSize}"/>
+       <property name="maxIdleTime" value="${c3p0pool.maxIdleTime}"/>
+       <property name="acquireIncrement" value="${c3p0pool.acquireIncrement}"/>
+       <property name="maxIdleTimeExcessConnections" value="${c3p0pool.maxIdleTimeExcessConnections}"/>
+       -->
+    </bean>
+</beans>

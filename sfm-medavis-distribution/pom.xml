@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- -->
+    <groupId>eu.artofcoding.sfm.medavis</groupId>
+    <artifactId>sfm-medavis-distribution</artifactId>
+    <version>1.0.0</version>
+    <!-- Packaging -->
+    <packaging>pom</packaging>
+    <!-- Properties -->
+    <properties>
+    </properties>
+    <!--
+        Dependencies.
+    -->
+    <dependencies>
+        <dependency>
+            <groupId>eu.artofcoding.sfm.medavis</groupId>
+            <artifactId>sfm-medavis-camel</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.sfm.medavis</groupId>
+            <artifactId>sfm-medavis-csv</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+    <!--
+        Build
+    -->
+    <build>
+        <!-- Resources -->
+        <resources>
+            <resource>
+                <directory>sfm-medavis-distribution/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <!-- Plugins -->
+        <plugins>
+            <!-- maven-assembly-plugin -->
+            <plugin>
+                <!-- http://maven.apache.org/plugins/maven-assembly-plugin/assembly.html -->
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/dist.xml</descriptor>
+                    </descriptors>
+                    <finalName>sfm-medavis-${project.version}</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <!--
+        Maven Environment.
+    -->
+    <!-- Repositories. -->
+    <repositories>
+        <!-- art of coding's Public Maven Repository (local) -->
+        <repository>
+            <id>public.maven.repository</id>
+            <name>Public Local Repository</name>
+            <url>file:../../public.maven.repository/</url>
+        </repository>
+        <!-- art of coding's Public Maven Repository
+        <repository>
+            <id>aoc.public.maven.repository</id>
+            <name>art of coding's public.maven.repository on GitHub</name>
+            <url>https://raw.github.com/artofcoding/public.maven.repository/master</url>
+            <layout>default</layout>
+        </repository>
+        -->
+        <!-- java.net -->
+        <repository>
+            <id>java.net</id>
+            <url>http://download.java.net/maven/2</url>
+        </repository>
+        <!-- Spring -->
+        <repository>
+            <id>spring-releases</id>
+            <name>Spring Maven RELEASE Repository</name>
+            <url>http://maven.springframework.org/release</url>
+        </repository>
+        <!-- JBoss -->
+        <repository>
+            <id>repository.jboss.org</id>
+            <name>JBoss Repository</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+        </repository>
+    </repositories>
+    <!-- Distribution Management. -->
+    <distributionManagement>
+        <!-- art of coding's Public Maven Repository (local) -->
+        <repository>
+            <id>public.maven.repository</id>
+            <name>Public Local Repository</name>
+            <url>file:../../public.maven.repository/</url>
+        </repository>
+    </distributionManagement>
+</project>
