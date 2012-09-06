@@ -46,7 +46,8 @@ public class FileUploadBeanImpl implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         Message in = exchange.getIn();
-        FileInputStreamCache body = in.getBody(FileInputStreamCache.class);
+        //FileInputStreamCache body = in.getBody(FileInputStreamCache.class);
+        StreamCache body = in.getBody(StreamCache.class);
         /*
         // Dump headers
         Map<String, Object> headers = in.getHeaders();
@@ -63,7 +64,8 @@ public class FileUploadBeanImpl implements Processor {
         try {
             // Content
             ByteArrayOutputStream baos = new ByteArrayOutputStream(contentLength);
-            baos.write(body);
+            //baos.write(body);
+            body.writeTo(baos);
             File file = new File(String.format("%s/tmp", workDirectory), name + ".importer");
             logger.info("Got file = '" + file.getAbsolutePath() + "'");
             FileUtils.writeByteArrayToFile(file, baos.toByteArray());
