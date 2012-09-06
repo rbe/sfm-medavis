@@ -25,19 +25,21 @@
     <!-- -->
     <root level="INFO">
         <appender-ref ref="ROLLINGFILE"/>
-        <!-- <appender-ref ref="STDOUT"/> -->
+        <appender-ref ref="STDOUT"/>
     </root>
-    <!-- -->
+    <!-- SFM Medavis -->
     <logger name="eu.artofcoding.sfm.medavis" level="DEBUG" additivity="false">
         <appender-ref ref="ROLLINGFILE"/>
-        <!-- <appender-ref ref="STDOUT"/> -->
+        <appender-ref ref="STDOUT"/>
     </logger>
+    <!--
     <logger name="eu.artofcoding.sfm.medavis.route" level="DEBUG" additivity="false">
         <appender-ref ref="ROLLINGFILE"/>
-        <!-- <appender-ref ref="STDOUT"/> -->
+        <appender-ref ref="STDOUT"/>
     </logger>
     <logger name="eu.artofcoding.sfm.medavis.admin" level="DEBUG" additivity="false">
         <appender-ref ref="ROLLINGFILE"/>
-        <!-- <appender-ref ref="STDOUT"/> -->
+        <appender-ref ref="STDOUT"/>
     </logger>
+    -->
 </configuration>
