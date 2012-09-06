@@ -31,13 +31,13 @@
         -->
         <!-- File upload route -->
         <route id="fileUpload">
-            <from uri="jetty:http://0.0.0.0:80/sfm-medavis-admin/upload?chunked=true"/>
+            <from uri="jetty:http://0.0.0.0:8080/sfm-medavis-admin/upload?chunked=true"/>
             <to uri="log:admin-fileupload"/>
             <process ref="fileUploadBean"/>
         </route>
         <!-- CSV export route -->
         <route id="csvExport">
-            <from uri="jetty:http://0.0.0.0:80/sfm-medavis-admin/export?chunked=true"/>
+            <from uri="jetty:http://0.0.0.0:8080/sfm-medavis-admin/export?chunked=true"/>
             <to uri="log:admin-csvexport"/>
             <process ref="csvExporterService"/>
         </route>
