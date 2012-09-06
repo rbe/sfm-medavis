@@ -34,7 +34,7 @@ public class FileUploadBeanImpl implements Processor {
     private Logger logger = LoggerFactory.getLogger(FileUploadBeanImpl.class);
 
     /**
-     * Working directory, remember to change directory in Camel route. 
+     * Working directory, remember to change directory in Camel route.
      */
     private final String workDirectory = "sfm-medavis-work";
 
@@ -83,7 +83,7 @@ public class FileUploadBeanImpl implements Processor {
                 // Strip file type, remaining is subtype
                 String name2 = name.replaceAll(suffix.toString(), "");
                 suffix.append("/").append(name2).append("/");
-                if (null != suffix && suffix.length() > 0) {
+                if (suffix.length() > 0) {
                     File dir = new File(String.format("%s/%s", workDirectory, suffix.toString()));
                     logger.info(String.format("Moving file '%s' to '%s'", file.getName(), dir.getAbsolutePath()));
                     FileUtils.moveFileToDirectory(file, dir, true);
@@ -94,6 +94,7 @@ public class FileUploadBeanImpl implements Processor {
             // HTTP status code 200
             exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 200);
         } catch (Exception e) {
+            logger.error("Could not save file",e);
             // HTTP status code 500
             exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 500);
         }
