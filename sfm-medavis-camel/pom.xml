@@ -77,6 +77,12 @@
             <artifactId>camel-cxf-transport</artifactId>
             <version>${version.org.apache.camel}</version>
         </dependency>
+        <!-- IntelliJ -->
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>forms_rt</artifactId>
+            <version>7.0.3</version>
+        </dependency>
         <!-- SFM Medavis -->
         <dependency>
             <groupId>eu.artofcoding.sfm.medavis</groupId>
@@ -107,6 +113,23 @@
                     <target>${version.java.vm}</target>
                     <showDeprecation>true</showDeprecation>
                     <verbose/>
+                </configuration>
+            </plugin>
+            <!-- ideauidesigner-maven-plugin, http://www.glxn.net/?p=279 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>ideauidesigner-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>javac2</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <fork>true</fork>
+                    <debug>true</debug>
+                    <failOnError>true</failOnError>
                 </configuration>
             </plugin>
             <!-- maven-resources-plugin -->

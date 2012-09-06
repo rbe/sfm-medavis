@@ -15,6 +15,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * http://www.jetbrains.com/idea/webhelp/creating-form-initialization-code.html
+ */
 public class MedavisMainForm {
 
     private JPanel medavisMainPanel;
@@ -29,16 +32,13 @@ public class MedavisMainForm {
         });
     }
 
-    public JFrame show() {
+    public JFrame getAndShowFrame() {
         JFrame frame = new JFrame("MedavisMainForm");
-        frame.setContentPane(new MedavisMainForm().medavisMainPanel);
+        frame.setContentPane(medavisMainPanel);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         return frame;
     }
 
-    private void createUIComponents() {
-        shutdownButton=new JButton(); 
-    }
 }

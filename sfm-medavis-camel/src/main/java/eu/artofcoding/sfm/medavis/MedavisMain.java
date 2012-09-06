@@ -66,7 +66,7 @@ public class MedavisMain {
         // Add shutdown hook
         addShutdownHook();
         // Show main form
-        medavisMainFrame = new MedavisMainForm().show();
+        medavisMainFrame = new MedavisMainForm().getAndShowFrame();
         // Await countdown latch... it's intended to wait forever
         while (!completed.get()) {
             try {
