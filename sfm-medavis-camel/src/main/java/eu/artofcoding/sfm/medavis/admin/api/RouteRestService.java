@@ -6,7 +6,7 @@
  * Alle Rechte vorbehalten. Nutzung unterliegt Lizenzbedingungen.
  * All rights reserved. Use is subject to license terms.
  *
- * rbe, 10.02.12 13:35
+ * rbe, 27.08.12 12:41
  */
 package eu.artofcoding.sfm.medavis.admin.api;
 
@@ -14,12 +14,14 @@ package eu.artofcoding.sfm.medavis.admin.api;
  *
  */
 public interface RouteRestService {
-    
+
     /**
-     * 
+     *
      */
     public String startRoute(String which, String what) throws Exception;
+
     public String stopRoute(String which, String what) throws Exception;
+
     public String upload() throws Exception;
-    
+
 }

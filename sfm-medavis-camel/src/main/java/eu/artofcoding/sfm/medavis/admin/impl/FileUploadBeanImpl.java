@@ -6,20 +6,22 @@
  * Alle Rechte vorbehalten. Nutzung unterliegt Lizenzbedingungen.
  * All rights reserved. Use is subject to license terms.
  *
- * rbe, 27.08.12 11:09
+ * rbe, 06.09.12 10:10
  */
-package eu.artofcoding.sfm.medavis.admin.impl;
 
-import java.io.File;
+package eu.artofcoding.sfm.medavis.admin.impl;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
+import org.apache.camel.StreamCache;
 import org.apache.camel.converter.stream.FileInputStreamCache;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
 
 /**
  * Camel controller bean involved in the starting route.
@@ -38,7 +40,6 @@ public class FileUploadBeanImpl implements Processor {
 
     /**
      * HTTP parameter name must be: http://.../upload?name=<type><subtype>.importer
-     *
      * @param exchange
      * @throws Exception
      */

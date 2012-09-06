@@ -1,10 +1,12 @@
 /*
- * SFM Medavis Tool
- * Copyright (C) 2011-2012 art of coding UG (haftungsbeschränkt).
+ * sfm-medavis
+ * sfm-medavis-csv
+ * Copyright (C) 2011-2012 art of coding UG, http://www.art-of-coding.eu/
  *
  * Alle Rechte vorbehalten. Nutzung unterliegt Lizenzbedingungen.
  * All rights reserved. Use is subject to license terms.
  *
+ * rbe, 05.09.12 21:33
  */
 package eu.artofcoding.sfm.medavis.csv.importer.impl;
 

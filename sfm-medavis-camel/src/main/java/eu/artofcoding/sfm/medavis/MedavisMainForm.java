@@ -6,7 +6,7 @@
  * Alle Rechte vorbehalten. Nutzung unterliegt Lizenzbedingungen.
  * All rights reserved. Use is subject to license terms.
  *
- * rbe, 03.09.12 17:29
+ * rbe, 03.09.12 19:55
  */
 
 package eu.artofcoding.sfm.medavis;

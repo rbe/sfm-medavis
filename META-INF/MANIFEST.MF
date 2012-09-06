@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: lib/logback-core-1.0.6.jar lib/jcl-over-slf4j-1.6.6.jar li
- b/logback-access-1.0.6.jar lib/logback-classic-1.0.6.jar lib/log4j-1.
- 2.17.jar lib/slf4j-api-1.6.6.jar lib/sfm-medavis-camel.jar lib/sfm-me
- davis-csv.jar
-Main-Class: eu.artofcoding.sfm.medavis.MedavisMain
-
