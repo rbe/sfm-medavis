@@ -59,6 +59,9 @@ public class OrbisIcpmCSVReaderImpl extends AbstractOrbisIcpmCSVReader<OrbisIcpm
         orbisBean.setName(list[10]);
         orbisBean.setVorname(list[11]);
         orbisBean.setGeburtstag(ParseHelper.parseDate(list[12]));
+        if (null == orbisBean.getGeburtstag()) {
+            orbisBean.setGeburtstag(ParseHelper.CAL_1_1_1900.getTime());
+        }
         orbisBean.setVorstaufnahme(ParseHelper.parseDate(list[13]));
         orbisBean.setAufnahme(ParseHelper.parseDate(list[14]));
         orbisBean.setEntlassung(ParseHelper.parseDate(list[15]));

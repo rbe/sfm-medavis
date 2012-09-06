@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * @author rbe
@@ -26,6 +27,16 @@ public class ParseHelper {
      */
     private static final Logger logger = LoggerFactory.getLogger(ParseHelper.class);
 
+    public static final Calendar CAL_1_1_1900;
+    
+    static {
+        // Default birthday if none found/parseable
+        CAL_1_1_1900 = Calendar.getInstance();
+        CAL_1_1_1900.set(Calendar.YEAR, 1900);
+        CAL_1_1_1900.set(Calendar.MONTH, Calendar.JANUARY);
+        CAL_1_1_1900.set(Calendar.DAY_OF_MONTH, 1);
+    }
+    
     /**
      * Do not create an instance of this class.
      */

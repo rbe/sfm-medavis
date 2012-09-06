@@ -66,13 +66,13 @@ public class Medavis10040CSVReaderImpl extends AbstractMedavisCSVReader<Medavis1
                     medavisBean.setBezeichnung(entry);
                     break;
                 case 3:
-                    medavisBean.setArt(entry);
+                    medavisBean.setArt(entry.intern());
                     break;
                 case 4:
-                    medavisBean.setCode(entry);
+                    medavisBean.setCode(entry.intern());
                     break;
                 case 5:
-                    medavisBean.setVersion(entry);
+                    medavisBean.setVersion(entry.intern());
                     break;
             }
             // Increase column counter

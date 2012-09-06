@@ -58,10 +58,10 @@ public class Medavis10025CSVReaderImpl extends AbstractMedavisCSVReader<Medavis1
             //         ["_am_Kasse_ohne_Abrechnung", "12345678", "Xxxx, Xxxxx *11.01.1911", "22.02.2011", "xxxxxxx",     "CT Abdomen Routine", "BARI150",     "Barilux-CT Suspkonz. 150ml PZN -0101528", "1",     "ml",      ""]
             switch (colCount) {
                 case 0:
-                    medavisBean.setKostentraeger(entry);
+                    medavisBean.setKostentraeger(entry.intern());
                     break;
                 case 1:
-                    medavisBean.setEpisode(entry);
+                    medavisBean.setEpisode(entry.intern());
                     break;
                 case 2:
                     // Split entry by '*' to get name and birthday
@@ -76,6 +76,9 @@ public class Medavis10025CSVReaderImpl extends AbstractMedavisCSVReader<Medavis1
                         medavisBean.setGeburtstag(geburtstag);
                     } else {
                         logger.error(String.format("parseData: Could not parse geburtstag in line number %d '%s': Length of array NOT >= 1", totalLineNumber, entry));
+                    }
+                    if (null == medavisBean.getGeburtstag()) {
+                        medavisBean.setGeburtstag(ParseHelper.CAL_1_1_1900.getTime());
                     }
                     break;
                 case 3:
@@ -92,7 +95,7 @@ public class Medavis10025CSVReaderImpl extends AbstractMedavisCSVReader<Medavis1
                     medavisBean.setUntKurzbezeichnung(entry);
                     break;
                 case 6:
-                    medavisBean.setMaterialKuerzel(entry);
+                    medavisBean.setMaterialKuerzel(entry.intern());
                     break;
                 case 7:
                     medavisBean.setMaterial(entry);
@@ -101,7 +104,7 @@ public class Medavis10025CSVReaderImpl extends AbstractMedavisCSVReader<Medavis1
                     medavisBean.setMenge(ParseHelper.parseDouble(entry));
                     break;
                 case 9:
-                    medavisBean.setEinheit(entry);
+                    medavisBean.setEinheit(entry.intern());
                     break;
             }
             // Increase column counter

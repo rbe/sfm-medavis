@@ -49,6 +49,9 @@ public class OrbisLstgCSVReaderImpl extends AbstractOrbisLstgCSVReader<OrbisLstg
         orbisBean.setNachname(list[0]);
         orbisBean.setVorname(list[1]);
         orbisBean.setGeburtstag(ParseHelper.parseDate(list[2]));
+        if (null == orbisBean.getGeburtstag()) {
+            orbisBean.setGeburtstag(ParseHelper.CAL_1_1_1900.getTime());
+        }
         orbisBean.setGeschlecht(list[3]);
         orbisBean.setFallnummer(list[4]);
         orbisBean.setRechnungsfallnummer(list[5]);

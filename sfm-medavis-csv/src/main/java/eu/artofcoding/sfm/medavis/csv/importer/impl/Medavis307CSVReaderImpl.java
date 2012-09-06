@@ -1,10 +1,12 @@
 /*
- * SFM Medavis Tool
- * Copyright (C) 2011-2012 art of coding UG (haftungsbeschränkt).
+ * sfm-medavis
+ * sfm-medavis-csv
+ * Copyright (C) 2011-2012 art of coding UG, http://www.art-of-coding.eu/
  *
  * Alle Rechte vorbehalten. Nutzung unterliegt Lizenzbedingungen.
  * All rights reserved. Use is subject to license terms.
  *
+ * rbe, 27.08.12 12:00
  */
 package eu.artofcoding.sfm.medavis.csv.importer.impl;
 
@@ -13,6 +15,8 @@ import eu.artofcoding.sfm.medavis.csv.importer.bean.Medavis307Bean;
 import eu.artofcoding.sfm.medavis.csv.importer.helper.ParseHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Calendar;
 
 /**
  * Read contents of a Medavis (weird) CSV file and put it into database:
@@ -77,6 +81,9 @@ public class Medavis307CSVReaderImpl extends AbstractMedavisCSVReader<Medavis307
                     } else {
                         logger.error(String.format("parseData: Could not parse untersuchung in line number %d '%s':", totalLineNumber, entry));
                     }
+                    if (null == medavisBean.getGeburtstag()) {
+                        medavisBean.setGeburtstag(ParseHelper.CAL_1_1_1900.getTime());
+                    }
                     break;
                 case 5:
                     medavisBean.setUntersuchung(entry);
@@ -85,7 +92,7 @@ public class Medavis307CSVReaderImpl extends AbstractMedavisCSVReader<Medavis307
                     medavisBean.setEpisode(entry);
                     break;
                 case 7:
-                    medavisBean.setOps(entry);
+                    medavisBean.setOps(entry.intern());
                     break;
             }
             // Increase column counter
