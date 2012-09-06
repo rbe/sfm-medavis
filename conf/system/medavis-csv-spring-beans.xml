@@ -12,6 +12,7 @@
     </bean>
     <!-- CSVExporter -->
     <bean id="csvExporterService" class="eu.artofcoding.sfm.medavis.csv.exporter.impl.CSVExporterImpl">
+        <property name="dataSource" ref="mysqlProdDbDatasource"/>
     </bean>
     <!-- Medavis145 -->
     <bean id="medavis145CSVReaderService" class="eu.artofcoding.sfm.medavis.csv.importer.impl.Medavis145CSVReaderImpl">
