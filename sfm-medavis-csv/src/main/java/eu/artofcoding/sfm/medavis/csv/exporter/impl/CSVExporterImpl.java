@@ -70,7 +70,7 @@ public class CSVExporterImpl implements CSVExporter {
         int line = 0; // Line counter
         try {
             // Create temporary file
-            file = File.createTempFile(view + "_", ".importer");
+            file = File.createTempFile(view + "_", ".exporter");
             file.deleteOnExit();
             // Open PrintWriter
             writer = new FileOutputStream(file);
@@ -171,7 +171,7 @@ public class CSVExporterImpl implements CSVExporter {
             // Read file into byte[] and gzip it
             fin = new FileInputStream(file);
             bin = new ByteArrayOutputStream();
-            byte[] buf = new byte[2 * 1024 * 1024];
+            byte[] buf = new byte[4 * 1024 * 1024];
             int buflen = 0;
             while ((buflen = fin.read(buf)) > -1) {
                 bin.write(buf, 0, buflen);
@@ -185,6 +185,7 @@ public class CSVExporterImpl implements CSVExporter {
                 // Content-Length
                 out.setHeader(Exchange.CONTENT_LENGTH, b.length);
             } else {
+                b = bin.toByteArray();
                 // Content-Length
                 out.setHeader(Exchange.CONTENT_LENGTH, file.length());
             }
@@ -258,4 +259,5 @@ public class CSVExporterImpl implements CSVExporter {
             out.setHeader(Exchange.HTTP_RESPONSE_CODE, 500);
         }
     }
+
 }
