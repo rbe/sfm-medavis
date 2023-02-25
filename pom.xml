@@ -27,7 +27,7 @@
         <!-- Logging -->
         <version.log4j>1.2.17</version.log4j>
         <version.org.slf4j>1.6.6</version.org.slf4j>
-        <version.ch.qos.logback>1.0.6</version.ch.qos.logback>
+        <version.ch.qos.logback>1.2.0</version.ch.qos.logback>
         <!-- -->
         <version.org.apache.commons.io>2.1</version.org.apache.commons.io>
         <version.org.apache.maven.plugins.felix-maven-bundle>2.3.7</version.org.apache.maven.plugins.felix-maven-bundle>
